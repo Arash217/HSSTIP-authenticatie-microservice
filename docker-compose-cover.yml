@@ -1,0 +1,17 @@
+version: "3"
+services:
+  authenticatie-service-cover:
+    build: .
+    image: authenticatie_service
+    command: npm run cover
+    links:
+      - authenticatie-db-test
+    environment:
+      DB_HOST: authenticatie-db-test
+      PORT: 3000
+      JWT_SECRET: pojiaj234oi234oij234oij4
+      ADMIN_KEY: bkJ2pI9fFepBxMs9DlpyaBOYcbTT14wF
+    volumes:
+      - ./coverage-result:/usr/src/app/coverage
+  authenticatie-db-test:
+    image: mongo:3.4

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  authenticatie-service-test:
+    build: .
+    image: authenticatie_service
+    command: npm run junit
+    links:
+      - authenticatie-db-test
+    environment:
+      DB_HOST: authenticatie-db-test
+      PORT: 3000
+      JWT_SECRET: pojiaj234oi234oij234oij4
+      ADMIN_KEY: bkJ2pI9fFepBxMs9DlpyaBOYcbTT14wF
+    volumes:
+      - ./test-result:/usr/src/app/test-result
+  authenticatie-db-test:
+    image: mongo:3.4

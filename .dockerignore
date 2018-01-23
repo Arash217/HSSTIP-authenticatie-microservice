@@ -1,0 +1,11 @@
+node_modules/
+.idea
+coverage-result
+test-result
+.gitignore
+README.md
+docker-compose-cover.yml
+docker-compose-prod.yml
+docker-compose-dev.yml
+docker-compose-test.yml
+Dockerfile

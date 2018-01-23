@@ -1,0 +1,37 @@
+version: "3"
+services:
+  authenticatie-service-prod:
+    build: .
+    image: authenticatie_service
+    networks:
+      - microservice
+    command: npm start
+    restart: on-failure
+    links:
+      - authenticatie-db-prod
+    ports:
+      - "8092:8092"
+    environment:
+      MESSAGING_SERVICE: messaging-service-prod
+      MESSAGING_SERVICE_PORT: 8096
+      STUDENT_SERVICE: student-service-prod
+      STUDENT_SERVICE_PORT: 8094
+      FRONTEND_ADDRESS: 145.97.16.182
+      FRONTEND_PORT: 8085
+      DB_HOST: authenticatie-db-prod
+      PORT: 8092
+      JWT_SECRET: pojiaj234oi234oij234oij4
+      ADMIN_KEY: bkJ2pI9fFepBxMs9DlpyaBOYcbTT14wF
+  authenticatie-db-prod:
+    image: mongo:3.4
+    networks:
+      - microservice
+    volumes:
+      - authenticatie-vm-prod:/data/db
+
+volumes:
+  authenticatie-vm-prod:
+
+networks:
+    microservice:
+      external: true
